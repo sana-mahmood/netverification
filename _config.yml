@@ -5,7 +5,7 @@ about: >
     Verification projects
 
 master_repo: false
-url: "https://hopnets.github.io/verification"
+url: "https://hopnets.github.io/netverification"
 markdown: kramdown
 highlighter: rouge
 
