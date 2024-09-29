@@ -53,6 +53,29 @@ title: Valinor framework home
 
 <hr/>
 <h2>Property decomposition</h2>
+<p>
+  Existing network verifiers have become efficient and effective in verifying a wide range of network specifications,
+  such as reachability properties, performance based properties such as latency, or verifying stateful network functions.
+  These network verifiers can be broadly categorized into two types, ones that verify safety properties (host "A" is reachable from host "B") 
+  and the ones that verify liveness properties (host "B" eventually finds a path to host "A").While it is quite straighforwad to categorize 
+  the existing verifiers based on the property they verify, it is non-trivial to divide network specifications into these two categorize, becaues 
+  many times network proeprties comprise both safety and liveness elements. Therefore, it is important to provide a way to decompose netowrk properties 
+  into their safety and liveness component, for their appropriate verification. We address the property decomposition in this work and provide a baseline 
+  verification model to verify decomposed properties.
+  <br><br>
+  Contributions:
+  <ul class="val-list-parent">
+    <li class="val-list"><b>Buchi Automata Representation:</b> Provide a set of network properties that encompass safety and liveness, 
+      represent them using Buchi automata and show their decomposed version of safety and liveness. </li>
+    <li class="val-list"><b>Decomposition Tool:</b> Create a tool that allows a user to input a network property in the form of 
+      Buchi automata and then returns the decomposed safety and liveness property of the original property.</li>
+    <li class="val-list"><b>Basic Verification Model:</b> Implement a basic verification model, that takes a network snapshot and uses 
+      it to verify whether the individual safety and liveness properties are met.</li>
+  </ul>
+The architecture of our Tool:
+  <br><br>
+  <img src="property_decomposition.png" class="design-figure" alt="Decomposition Tool Architecture">
+</p>
 
 <hr/>
 <h2>Packet-level latency verification</h2>
