@@ -7,7 +7,7 @@ title: Valinor framework home
 <p>
   &diams; While existing network verification tools focus almost exclusively on different variants of reachability, can we verify <b>liveness properties</b> at scale? <br><br>
   &diams; Given a <b>combinational property</b>, i.e., a property that falls under both safety and liveness criteria, can we decompose it to <b>safety-only</b> and <b>liveness-only</b> properties? <br><br>
-  &diams; Can we verify the <b>latency</b> of modern large-scale networks with <b>packet-level granularity</b>?
+  &diams; Given the tight latency requirements of modern applications, can we verify the <b>latency</b> of large-scale networks with <b>packet-level granularity</b>?
 </p>
 <p>
   Below, we highlight the <a href="http://soudeh.net/#research">research</a> conducted by <a href="http://soudeh.net/#bio">our team</a> to answer these questions.
@@ -62,49 +62,49 @@ Existing network verifiers can be categorized by the type of network property th
   <br><br>
   Contributions:
   <ul class="val-list-parent">
-    <li class="val-list"><b>Buchi Automata Representation:</b> We characterize a set of network properties that encompass safety and liveness, 
+    <li class="val-list"><b>Buchi automata representation:</b> We characterize a set of network properties that encompass safety and liveness, 
       provide their representation in the form of Buchi automata, as wel as their decomposed components of safety and liveness. </li>
-    <li class="val-list"><b>Decomposition Tool:</b> We create a tool that allows a user to input a network property in the form of Buchi automata 
+    <li class="val-list"><b>Decomposition tool:</b> We create a tool that allows a user to input a network property in the form of Buchi automata 
       and then returns its decomposed safety and liveness properties. The decomposition is based on the automata-theoric approach adapted from distributed systems. </li>
-    <li class="val-list"><b>Basic Verification Model:</b> We implement a basic verification model, that takes network snapshots and uses them to 
+    <li class="val-list"><b>Basic verification model:</b> We implement a basic verification model, that takes network snapshots and uses them to 
       verify whether the individual safety and liveness properties are met. </li>
   </ul>
-The architecture of our Tool:
+The architecture of our tool:
   <br><br>
   <img src="property_decomposition.png" class="design-figure" alt="Decomposition Tool Architecture">
 </p>
 
-<h3>Characterizing Safety and Liveness</h3>
+<h3>Characterizing safety and liveness</h3>
 <p>
-  <i>Safety</i> properties are characterized as ones which proscribe a "bad thing", or simply put they ensure the system deliver the correct 
+  <i>Safety</i> properties are characterized as ones which proscribe a <b>bad thing</b>, i.e., they ensure the system deliver the correct 
   output and does not fail. In terms of networks, properties such as "Host S reaches Host D only after passing a waypoint W" or "A firewall 
   blacklists the outside Host A if it tries to initiate a communication with an inside Host B", are classified as safety properties.
   <br>
-  <i>Liveness</i> properties stipulate that "good things" eventually happen, in terms of a program running it means that the program eventually 
+  <i>Liveness</i> properties stipulate that <b>good things</b> eventually happen, e.g., in terms of a program running it means that the program eventually 
   termintates. Exemplifying liveness properties in computer networks would be that, "Host S eventually finds a path to Host D that passes 
   through the waypoint W", or "a firewall eventually whitelists an outside Host A, if an inside Host B initiates communication with it".
 </p>
 
-<h3>Expressive Representation of properties using our tool.</h3>
+<h3>Our tool is expressive.</h3>
 <p>
   Our tool succesfully provides a way to express network properties as Buchi automata, by using its interfaced parameters. Following figure represents 
-  the Buchi automata of waypoint example mentioned earlier ("Traffic from S should pass through W before it reaches D"), that a user can input using our tool,
+  the Buchi automata of waypoint example mentioned earlier (traffic from S should pass through W before it reaches D), that a user can input using our tool,
   the automata fully encapsulates the requirements of the waypoint property. Where an input is only accepted when it reaches from S to D by passing through W, 
   moreover the accepting state would be visited infinitely which fulfils the Buchi automata requirement.
   <br><br>
   <img src="waypoint_tool.png" class="design-figure" alt="Waypoint Automata">
 </p>
 
-<h3>Successful decomposition of properties by our tool.</h3>
+<h3>Our tool successfully decomposes distinct properties.</h3>
 <p>
-  Following two automata represent the output safety and liveness component of the waypoint property. First figure specifies safety, that it only rejects 
+  The two automata below represent the output safety and liveness component of the waypoint property. First figure specifies safety, that it only rejects 
   the "bad thing" that is S reaching D without passing through W, the second figure specifies liveness, which accepts all inputs that reach D, with or 
   without passing W, becaues it waits for the "good thing" to eventually happen, for S to pass through W before it reaches D.
   <br><br>
   <img src="waypoint_tool_s_l.png" class="design-figure" alt="Waypoint Automata Saftery and Liveness Decomposed">
 </p>
 
-<h3>Successful Verification of decomposed properties</h3>
+<h3>Our tool verifies the decomposed properties.</h3>
 <p>
   We put our verification model to test with different network graphs and it succesfully verifies whether the safety and bounded liveness properties are met by traversing 
   the network and using the decomposed Buchi automata.
